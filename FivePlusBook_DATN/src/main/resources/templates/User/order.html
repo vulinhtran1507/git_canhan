@@ -1,0 +1,62 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/layout::dynamic(~{::title},~{::body})}">
+<head>
+<meta charset="utf-8">
+<title>Đơn hàng của bạn</title>
+
+</head>
+<body ng-controller="order">
+	<div id="content-page" class="content-page">
+		<div class="container-fluid checkout-content" style="width: 80%;">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="iq-card">
+						<div class="iq-card-header d-flex justify-content-between">
+							<div class="iq-header-title">Đơn hàng của tôi</div>
+						</div>
+						<div class="iq-card-body">
+							<div class="table-responsive">
+								<table class="data-tables table table-default"
+									style="width: 100%">
+									<thead>
+										<tr>
+											<th>Ngày đặt hàng</th>
+											<th>Tổng tiền</th>
+											<th>Phí vận chuyển</th>
+											<th>Địa chỉ</th>
+											<th>Trạng thái</th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="o in myOrder">
+											<td>{{o.createDate | date:'dd/MM/yyyy'}}</td>
+											<td>{{o.billtotal - o.ship | number:0}} VNĐ</td>
+											<td>{{o.ship | number:0}} VNĐ</td>
+											<td>
+												<p class="mb-0">{{o.address}}</p>
+											</td>
+											<td>
+												<!-- <span ng-if="!o.status">Chưa thanh toán</spa> -->
+												<span>{{ o.status ? 'Đã thanh toán' : 'Chưa thanh toán'}}</span>
+												<button ng-if="o.status.id === 1"
+													ng-click="changeStatus(o.id, 4)"
+													class="btn btn-danger bg-danger">Cancel</button> <!-- 												<button ng-if="o.status.id === 3" -->
+												<!-- 													ng-click="changeStatus(o.id, 3)" --> <!-- 													class="btn btn-success bg-success">Đánh giá</button> -->
+											</td>
+											<td><a href="/bill-details/{{o.id}}">Xem
+													ngay</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

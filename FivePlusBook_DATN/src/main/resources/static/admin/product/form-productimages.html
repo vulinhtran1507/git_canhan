@@ -1,0 +1,108 @@
+<div class="row">
+	<div class="col-sm-12">
+		<div class="iq-card">
+			<div class="iq-card-header d-flex justify-content-between">
+				<div class="iq-header-title">
+					<h4 class="card-title">Thêm ảnh phụ truyện</h4>
+				</div>
+			</div>
+			<div class="iq-card-body">
+				<form method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<label>Mã hình:</label> <input type="number" ng-model="image.id"
+							readonly="readonly" class="form-control">
+					</div>
+					<div class="form-group">
+						<label>Mã truyện:</label> <input type="text"
+							ng-model="image.book.id" class="form-control">
+					</div>
+
+					<div class="form-group">
+						<label>Hình ảnh:</label>
+						<div class="custom-file">
+							<input type="file" class="custom-file-input"
+								ng-model="image.link" accept="image/png, image/jpeg"
+								onchange="angular.element(this).scope().imageChangedadd(this.files)">
+							<label class="custom-file-label">Chọn file</label>
+						</div>
+					</div>
+
+
+
+
+					<button ng-click="createimage()" class="btn btn-primary">Thêm</button>
+					<button ng-click="updateimage()" class="btn btn-success">Cập nhật</button>
+					<button ng-click="deleteimage(image)" class="btn btn-danger">Xóa</button>
+					<button ng-click="reset()" class="btn btn-info">Làm mới</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<div class="iq-card">
+			<div class="iq-card-header d-flex justify-content-between">
+				<div class="iq-header-title">
+					<h4 class="card-title">Danh sách truyện</h4>
+				</div>
+
+			</div>
+			<div class="iq-card-body">
+				<div class="table-responsive">
+					<table class="data-tables table table-striped table-bordered"
+						style="width: 100%">
+						<thead>
+							<tr>
+								<th style="width: 20%;">Mã hình</th>
+								<th style="width: 20%;">Mã truyện</th>
+								<th style="width: 50%;">Hình ảnh chính</th>
+								<th style="width: 20%;">Hình ảnh phụ</th>
+								<th>Thao tác</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in itemsimages">
+								<td>{{item.id}}</td>
+								<td>{{item.book.id}}</td>
+								<td><img src="../../../images/book/{{item.book.image}}"
+									width="100px"></td>
+								<td><img src="../../../images/bookdec/{{item.link}}"
+									width="70px"></td>
+								<td>
+									<div class="flex align-items-center list-user-action">
+										<a class="bg-primary" data-toggle="tooltip"
+											data-placement="top" title="" data-original-title="Edit"
+											ng-click="editanhphu(item)"><i class="ri-pencil-line"></i></a>
+										<a class="bg-primary" data-toggle="tooltip"
+											data-placement="top" title="" data-original-title="Xoá"
+											ng-click="deleteimage(item)"><i
+											class="ri-delete-bin-line"></i></a>
+									</div>
+								</td>
+							</tr>
+
+
+						</tbody>
+
+					</table>
+					<div class="cart-footer text-center">
+						<button ng-click="pager.first()" class="btn btn-primary">
+							<i class="ri-skip-back-fill"></i>
+						</button>
+						<button ng-click="pager.prev()" class="btn btn-primary">
+							<i class="ri-rewind-fill"></i>
+						</button>
+						<button class="btn btn-primary">{{pager.page +1}} /
+							{{pager.count}}</button>
+						<button ng-click="pager.next()" class="btn btn-primary">
+							<i class="ri-speed-fill"></i>
+						</button>
+						<button ng-click="pager.last()" class="btn btn-primary">
+							<i class="ri-skip-forward-fill"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

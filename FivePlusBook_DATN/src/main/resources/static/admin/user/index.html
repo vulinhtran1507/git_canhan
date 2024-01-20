@@ -1,0 +1,200 @@
+<!-- Page Content  -->
+<div id="content-page" class="">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="iq-card">
+					<div class="iq-card-header d-flex justify-content-between">
+						<div class="iq-header-title">
+							<h4 class="card-title">Quản lý người dùng</h4>
+						</div>
+					</div>
+					<div class="iq-card-body">
+						<form method="post" enctype="multipart/form-data">
+							<div class="row">
+								<div class="col-lg-6" style="margin-top: 20px">
+									<div ng-if="imgaedefault == true" class="form-group img-thumbnail" style="text-align: center; height: 95%">
+										<img src="../../images/user/hinhnen.jfif"
+											style="border-radius: 10px;" width="400px" height="400px">
+										<hr>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroupFileAddon01">Tải
+													lên</span>
+											</div>
+											<div class="custom-file">
+												<input type="file" class="custom-file-input"
+													aria-describedby="inputGroupFileAddon01" id="photo"
+													ng-model="form.photo"
+													onchange="angular.element(this).scope().imageChanged(this.files)"
+													accept="image/png, image/jpeg"> <label
+													class="custom-file-label" for="inputGroupFile01">Chọn
+													ảnh</label>
+											</div>
+										</div>
+									</div>
+									<div ng-if="imgaedefault == false" class="form-group img-thumbnail" style="text-align: center;height: 95%">
+										<img src="../../images/user/{{form.photo}}"
+											style="border-radius: 10px;" width="400px" height="400px">
+										<hr>
+										<div class="input-group">
+											<div class="input-group-prepend">
+												<span class="input-group-text" id="inputGroupFileAddon01">Tải
+													lên</span>
+											</div>
+											<div class="custom-file">
+
+												<input type="file" class="custom-file-input"
+													aria-describedby="inputGroupFileAddon01" id="photo"
+													ng-model="form.photo"
+													onchange="angular.element(this).scope().imageChanged(this.files)"
+													accept="image/png, image/jpeg"> <label
+													class="custom-file-label" for="inputGroupFile01">Chọn
+													ảnh</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="col-md-4">
+									<div class="row align-items-center">
+										<a href="javascript:void(0);"> <img ng-src="{{'/images/user/' + form.photo}}"
+												class="img-fluid w-100 rounded" alt="">
+										</a>
+									</div>
+								</div> -->
+								<div class="col-md-6">
+									<div class="form-group">
+										<label>Tên đăng nhập:(<strong>*</strong>)  </label> <input type="text"
+											name="username" class="form-control"
+											th:readonly="{{form.username != null}}"
+											ng-model="form.username">
+									</div>
+									<div class="form-group">
+										<label>Họ và tên:(<strong>*</strong>)  </label> <input type="text"
+											class="form-control" ng-model="form.fullname" name="fullname">
+									</div>
+									<div class="form-group">
+										<label>Mật Khẩu:(<strong>*</strong>)  </label> <input type="password"
+											class="form-control" name="password" ng-model="form.password">
+									</div>
+									<div class="form-group">
+										<label>Email:(<strong>*</strong>)  </label> <input type="email" class="form-control"
+											ng-model="form.email" name="email">
+									</div>
+
+									<div class="form-group">
+										<label>Số điện thoại:(<strong>*</strong>) </label> <input type="tel"
+											class="form-control" name="phone" ng-model="form.phone">
+									</div>
+
+
+									<div class="form-group">
+										<label>Địa chỉ:(<strong>*</strong>)  </label> <input type="text"
+											class="form-control" name="address" ng-model="form.address">
+									</div>
+
+									<!-- <div class="form-group">
+										<label>Hình ảnh:</label>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="photo"
+												onchange={angular.element(this).scope().imageChanged(this.files)}
+												accept="image/png, image/jpeg"> <label
+												class="custom-file-label">Choose file</label><label
+												class="custom-file-label">Choose file</label>
+										</div>
+									</div> -->
+
+									<div class="form-group">
+										<button ng-click="create()" class="btn btn-primary"
+											ng-hide="index == -1">
+											<i class="bi bi-person-plus"></i> Thêm
+										</button>
+										<button ng-click="update()" class="btn btn-success"
+											ng-show="index == -1">
+											<i class="bi bi-pencil-square"></i> Cập nhật
+										</button>
+										<button ng-click="delete(form)" class="btn btn-danger"
+											ng-show="index == -1">
+											<i class="bi bi-trash3"></i> Xóa
+										</button>
+										<button ng-click="reset()" class="btn btn-info">
+											<i class="bi bi-arrow-clockwise"></i> Làm mới
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="iq-card">
+					<div class="iq-card-header d-flex justify-content-between">
+						<div class="iq-header-title">
+							<h4 class="card-title">Danh sách người dùng</h4>
+						</div>
+						<div class="iq-header-title">
+							<label for="searchInput"><i class="ri-search-eye-line"></i>
+								Tìm kiếm:</label> <input type="text" id="searchInput"
+								ng-model="searchText">
+						</div>
+
+					</div>
+					<div class="iq-card-body">
+						<div class="table-responsive">
+							<table class="table mb-0 table-striped table-bordered">
+								<thead>
+									<tr>
+										<th scope="col">Ảnh</th>
+										<th scope="col">Tên đăng nhập</th>
+										<th scope="col">Họ và tên</th>
+										<th scope="col">Email</th>
+										<th scope="col">Số điện thoại</th>
+										<th scope="col">Địa chỉ</th>
+										<th scope="col">Tùy chọn</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in pager.items | filter:searchText">
+										<td><img src="../../../images/user/{{item.photo}}"
+											width="100px" /></td>
+										<td>{{item.username}}</td>
+										<td>{{item.fullname}}</td>
+										<td>{{item.email}}</td>
+										<td>{{item.phone}}</td>
+										<td>{{item.address}}</td>
+										<td>
+											<div class="flex align-items-center list-user-action">
+												<a class="bg-primary" data-toggle="tooltip"
+													data-placement="top" title="" data-original-title="Sửa"
+													ng-click="edit(item)"><i class="ri-pencil-line"></i></a>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="cart-footer text-center">
+					<button ng-click="pager.first()" class="btn btn-primary">
+						<i class="ri-skip-back-fill"></i>
+					</button>
+					<button ng-click="pager.prev()" class="btn btn-primary">
+						<i class="ri-rewind-fill"></i>
+					</button>
+					<button class="btn btn-success">{{pager.page +1}} /
+						{{pager.count}}</button>
+					<button ng-click="pager.next()" class="btn btn-primary">
+						<i class="ri-speed-fill"></i>
+					</button>
+					<button ng-click="pager.last()" class="btn btn-primary">
+						<i class="ri-skip-forward-fill"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

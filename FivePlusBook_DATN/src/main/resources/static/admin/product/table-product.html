@@ -1,0 +1,85 @@
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="iq-card">
+			<div class="iq-card-header d-flex justify-content-between">
+				<div class="iq-header-title">
+					<h4 class="card-title">Danh sách truyện</h4>
+				</div>
+				<div class="iq-header-title">
+					<label for="searchInput"><i class="ri-search-eye-line"></i>Tìm kiếm:</label> <input type="text"
+						id="searchInput" ng-model="searchText">
+				</div>
+			</div>
+			<div class="iq-card-body">
+				<div class="table-responsive">
+					<table class="table data-tables table-striped table-bordered"
+						style="width: 100%">
+						<thead>
+							<tr>
+								<th>Mã truyện</th>
+								<th>Hình ảnh</th>
+								<th>Tên truyện</th>
+								<th>Thể loại truyện</th>
+								<th>Tác giả truyện</th>
+								<th>Mô tả truyện</th>
+								<th>Giá</th>
+								<!-- <th style="width: 7%;">Thêm ảnh phụ</th> -->
+								<th>Thêm ảnh đọc thử</th>
+								<th>Hoạt động</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="item in pager.items | filter:searchText">
+								<td>{{item.id}}</td>
+								<td><img src="../../../images/book/{{item.image}}"
+									width="70px"></td>
+								<td>{{item.name}}</td>
+								<td>{{item.category.name}}</td>
+								<td>{{item.author.name}}</td>
+								<td>
+									<p class="mb-0">{{item.discriptions}}</p>
+								</td>
+								<td>{{item.price | number : 0}} VNĐ</td>
+								<!-- <td><a ng-click="editanh(item.id)"><i
+										class="fas fa-images"></i></a></td> -->
+								<td><a ng-click="editproofreads(item.id)"><i
+										class="fas fa-image"></i></a></td>
+								<td>
+									<div class="flex align-items-center list-user-action">
+										<a class="bg-primary" data-toggle="tooltip"
+											data-placement="top" title="" data-original-title="Edit"
+											ng-click="edit(item)"><i class="ri-pencil-line"></i></a> <a
+											class="bg-danger" data-toggle="tooltip" data-placement="top"
+											title="" data-original-title="Xoá" ng-click="delete(item)"><i
+											class="ri-delete-bin-line"></i></a>
+									</div>
+								</td>
+							</tr>
+
+
+						</tbody>
+
+					</table>
+					<div class="cart-footer text-center">
+						<button ng-click="pager.first()" class="btn btn-primary">
+							<i class="ri-skip-back-fill"></i>
+						</button>
+						<button ng-click="pager.prev()" class="btn btn-primary">
+							<i class="ri-rewind-fill"></i>
+						</button>
+						<button class="btn btn-success">{{pager.page +1}} /
+							{{pager.count}}</button>
+						<button ng-click="pager.next()" class="btn btn-primary">
+							<i class="ri-speed-fill"></i>
+						</button>
+						<button ng-click="pager.last()" class="btn btn-primary">
+							<i class="ri-skip-forward-fill"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
